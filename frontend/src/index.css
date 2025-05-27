@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme using the new color palette */
+    --background: 0 0% 100%; /* White background for light mode */
+    --foreground: 210 11% 15%; /* gunmetal-300 converted to HSL for text */
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 210 11% 15%; /* gunmetal-300 for card text */
+    --popover: 0 0% 100%; /* White popovers */
+    --popover-foreground: 210 11% 15%; /* gunmetal-300 for popover text */
+    --primary: 295 15% 41%; /* chinese_violet as primary */
+    --primary-foreground: 0 0% 98%; /* White text on primary */
+    --secondary: 210 11% 71%; /* gunmetal-700 as secondary */
+    --secondary-foreground: 210 11% 15%; /* gunmetal-300 for secondary text */
+    --muted: 210 11% 83%; /* gunmetal-800 as muted background */
+    --muted-foreground: 210 11% 41%; /* gunmetal-500 for muted text */
+    --accent: 307 35% 63%; /* french_mauve as accent */
+    --accent-foreground: 210 11% 15%; /* gunmetal-300 for accent text */
+    --destructive: 0 84% 60%; /* Red for destructive actions */
+    --destructive-foreground: 0 0% 98%; /* White text on destructive */
+    --border: 210 11% 83%; /* gunmetal-800 for borders */
+    --input: 210 11% 91%; /* gunmetal-900 for input backgrounds */
+    --ring: 295 15% 41%; /* chinese_violet for focus rings */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark theme using the new color palette */
+    --background: 210 11% 15%; /* gunmetal-300 as dark background */
+    --foreground: 210 11% 91%; /* gunmetal-900 for dark text */
+    --card: 210 11% 19%; /* gunmetal-400 for dark cards */
+    --card-foreground: 210 11% 91%; /* gunmetal-900 for dark card text */
+    --popover: 210 11% 19%; /* gunmetal-400 for dark popovers */
+    --popover-foreground: 210 11% 91%; /* gunmetal-900 for dark popover text */
+    --primary: 307 35% 63%; /* french_mauve as primary in dark */
+    --primary-foreground: 210 11% 15%; /* gunmetal-300 for primary text */
+    --secondary: 210 11% 25%; /* gunmetal-500 as secondary in dark */
+    --secondary-foreground: 210 11% 91%; /* gunmetal-900 for secondary text */
+    --muted: 210 11% 25%; /* gunmetal-500 as muted background in dark */
+    --muted-foreground: 210 11% 71%; /* gunmetal-700 for muted text */
+    --accent: 325 45% 70%; /* amaranth_pink as accent in dark */
+    --accent-foreground: 210 11% 15%; /* gunmetal-300 for accent text */
+    --destructive: 0 63% 31%; /* Darker red for destructive in dark mode */
+    --destructive-foreground: 0 0% 98%; /* White text on destructive */
+    --border: 210 11% 25%; /* gunmetal-500 for borders in dark */
+    --input: 210 11% 25%; /* gunmetal-500 for input backgrounds in dark */
+    --ring: 307 35% 63%; /* french_mauve for focus rings in dark */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    height: 100%;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  #root {
+    height: 100%;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-2px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(2px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(119, 86, 122, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(119, 86, 122, 0.6);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Custom shadow utilities */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+}
