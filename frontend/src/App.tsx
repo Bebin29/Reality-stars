@@ -5,6 +5,7 @@ import TestPage from './pages/Test';
 import SmartDashboard from './pages/SmartDashboard';
 import Profile from './pages/Profile';
 import Personalities from './pages/Personalities';
+import PersonalityDetail from './pages/PersonalityDetail';
 import { useEffect } from 'react';
 
 // A layout for authenticated users
@@ -47,6 +48,7 @@ function App() {
           <Route index element={<SmartDashboard />} /> {/* Default page after login */}
           <Route path="profile" element={<Profile />} />
           <Route path="personalities" element={<Personalities />} />
+          <Route path="personality/:id" element={<PersonalityDetail />} />
           <Route path="test" element={<TestPage />} />
         </Route>
       </Routes>

@@ -15,6 +15,96 @@ export interface Personality {
   profile_image?: string;
   created_at?: string;
   updated_at?: string;
+  // Related data from joins
+  social_media_account?: SocialMediaAccount[];
+  appearance?: Appearance[];
+  controversy?: Controversy[];
+  award?: Award[];
+  media?: Media[];
+  external_link?: ExternalLink[];
+}
+
+export interface SocialMediaAccount {
+  account_id: string;
+  personality_id: string;
+  platform_id: string;
+  handle: string;
+  url: string;
+  created_at: string;
+  updated_at: string;
+  social_media_platform: SocialMediaPlatform;
+}
+
+export interface SocialMediaPlatform {
+  platform_id: string;
+  name: string;
+  base_url?: string;
+}
+
+export interface Appearance {
+  appearance_id: string;
+  personality_id: string;
+  show_id: string;
+  episode_id?: string;
+  role?: string;
+  appearance_date?: string;
+  notes?: string;
+  tv_show: TvShow;
+  episode?: Episode;
+}
+
+export interface TvShow {
+  show_id: string;
+  title: string;
+  network_id: string;
+  start_date?: string;
+  end_date?: string;
+  description?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Episode {
+  episode_id: string;
+  season_id: string;
+  episode_number: number;
+  title?: string;
+  air_date?: string;
+  description?: string;
+}
+
+export interface Controversy {
+  controversy_id: string;
+  personality_id: string;
+  title: string;
+  description: string;
+  date: string;
+  source_url?: string;
+}
+
+export interface Award {
+  award_id: string;
+  personality_id: string;
+  award_name: string;
+  category?: string;
+  year: number;
+  organization?: string;
+}
+
+export interface Media {
+  media_id: string;
+  personality_id: string;
+  type: 'photo' | 'video' | 'clip' | 'other';
+  url: string;
+  caption?: string;
+  created_at: string;
+}
+
+export interface ExternalLink {
+  link_id: string;
+  personality_id: string;
+  type: string;
+  url: string;
 }
 
 export interface ApiResponse<T = unknown> {
