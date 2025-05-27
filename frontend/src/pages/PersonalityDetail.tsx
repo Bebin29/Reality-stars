@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { apiService, type Personality } from '@/lib/api';
+import { usePersonalityAvatar } from '@/lib/avatar';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -22,7 +23,8 @@ import {
   Facebook,
   Youtube,
   Edit,
-  Share
+  Share,
+  Loader2
 } from 'lucide-react';
 
 export default function PersonalityDetail() {
@@ -31,6 +33,9 @@ export default function PersonalityDetail() {
   const [personality, setPersonality] = useState<Personality | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Use the new avatar hook
+  const { avatarUrl, loading: avatarLoading } = usePersonalityAvatar(id || '');
 
   useEffect(() => {
     if (!id) {
@@ -168,17 +173,25 @@ export default function PersonalityDetail() {
               <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
                 {/* Profile Image */}
                 <div className="flex-shrink-0">
-                  {personality.profile_image ? (
+                  {avatarLoading ? (
+                    <div className="w-32 h-32 bg-gunmetal-100 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                      <Loader2 className="h-8 w-8 animate-spin text-gunmetal-400" />
+                    </div>
+                  ) : avatarUrl ? (
                     <img
-                      src={personality.profile_image}
+                      src={avatarUrl}
                       alt={`${personality.first_name} ${personality.last_name}`}
                       className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
                     />
-                  ) : (
-                    <div className="w-32 h-32 bg-gradient-to-br from-chinese_violet-400 to-french_mauve-400 rounded-full flex items-center justify-center text-white font-bold text-3xl shadow-lg">
-                      {getPersonalityInitials(personality)}
-                    </div>
-                  )}
+                  ) : null}
+                  
+                  <div className={`w-32 h-32 bg-gradient-to-br from-chinese_violet-400 to-french_mauve-400 rounded-full flex items-center justify-center text-white font-bold text-3xl shadow-lg ${avatarUrl && !avatarLoading ? 'hidden' : ''}`}>
+                    {personality ? getPersonalityInitials(personality) : '?'}
+                  </div>
                 </div>
 
                 {/* Basic Info */}

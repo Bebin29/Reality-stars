@@ -144,6 +144,15 @@ export interface CreatePersonalityRequest {
   profile_image?: string;
 }
 
+export interface PersonalityWithAvatar {
+  personality_id: string;
+  first_name: string;
+  last_name: string;
+  has_avatar: boolean;
+  shows: string[];
+  latest_show?: string;
+}
+
 class ApiService {
   private getAuthHeaders(accessToken?: string): HeadersInit {
     const headers: HeadersInit = {
@@ -220,6 +229,11 @@ class ApiService {
     const healthUrl = import.meta.env.VITE_BACKEND_URL?.replace('/api', '') || 'http://localhost:3001';
     const response = await fetch(`${healthUrl}/health`);
     return this.handleResponse<ApiResponse>(response);
+  }
+
+  async getPersonalitiesWithAvatars(): Promise<ApiResponse<PersonalityWithAvatar[]>> {
+    const response = await fetch(`${API_BASE_URL}/personalities/avatars`);
+    return this.handleResponse<ApiResponse<PersonalityWithAvatar[]>>(response);
   }
 }
 

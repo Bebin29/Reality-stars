@@ -270,4 +270,24 @@ export class PersonalityController {
       });
     }
   }
+
+  // GET /api/personalities/avatars
+  async getPersonalitiesWithAvatars(req: Request, res: Response): Promise<void> {
+    try {
+      const result = await personalityService.getPersonalitiesWithAvatars();
+      
+      if (!result.success) {
+        res.status(500).json(result);
+        return;
+      }
+
+      res.status(200).json(result);
+    } catch (error) {
+      console.error('Error in getPersonalitiesWithAvatars controller:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Internal server error'
+      });
+    }
+  }
 } 

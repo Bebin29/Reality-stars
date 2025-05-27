@@ -6,7 +6,7 @@ export const isAdmin = (user: User | null): boolean => {
   // Check if user has admin role or specific admin email
   // You can customize this logic based on your needs
   const adminEmails = [
-    'admin@realitystars.com',
+    'benedikt.koch123@gmx.net',
     // Add more admin emails here
   ];
   

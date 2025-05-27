@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { apiService, type Personality } from '@/lib/api';
-import { Users, Search, Plus, TrendingUp, Star, Calendar, Settings } from 'lucide-react';
+import { Users, Search, Plus, TrendingUp, Star, Calendar, Settings, Image } from 'lucide-react';
 
 export default function AdminDashboard() {
   const supabase = useSupabaseClient();
@@ -283,17 +283,17 @@ export default function AdminDashboard() {
                   </Button>
                 </Link>
                 
+                <Link to="/admin/avatars">
+                  <Button variant="outline" className="w-full">
+                    <Image className="h-4 w-4 mr-2" />
+                    Avatar-Verwaltung
+                  </Button>
+                </Link>
+                
                 <Link to="/admin/statistics">
                   <Button variant="outline" className="w-full">
                     <TrendingUp className="h-4 w-4 mr-2" />
                     Erweiterte Statistiken
-                  </Button>
-                </Link>
-                
-                <Link to="/admin/users">
-                  <Button variant="outline" className="w-full">
-                    <Settings className="h-4 w-4 mr-2" />
-                    Benutzerverwaltung
                   </Button>
                 </Link>
               </CardContent>

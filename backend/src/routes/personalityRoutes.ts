@@ -6,6 +6,7 @@ const router = Router();
 const personalityController = new PersonalityController();
 
 // Public routes (no authentication required)
+router.get('/avatars', personalityController.getPersonalitiesWithAvatars.bind(personalityController));
 router.get('/search', personalityController.searchPersonalities.bind(personalityController));
 router.get('/by-show/:showId', optionalAuth, personalityController.getPersonalitiesByShow.bind(personalityController));
 router.get('/:id', optionalAuth, personalityController.getPersonalityById.bind(personalityController));
